@@ -1,0 +1,9 @@
+*.txt
+*.zip
+*.class
+*.cache
+*.org
+*.log
+karthik_learn_kubernetes_2018/
+kim_learn_kubernete_2022/
+kubernetesHelloworld/
