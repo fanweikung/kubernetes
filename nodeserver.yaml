@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-nodeserver-deployment
+  namespace: development
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  replicas: 1 # deployment runs 1 pods matching the template
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: myapp
+          image: fanweikung/nodeserver:1.1.1
+          # image: karthequian/helloworld:latest
+          ports:
+            - containerPort: 3000 #Endpoint is at port 3000 in the container
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-nodeserver-service
+  namespace: development
+spec:
+  type: NodePort #Exposes the service as a node port
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 3000
+  selector:
+    app: myapp
